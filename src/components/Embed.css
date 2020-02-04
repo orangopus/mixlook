@@ -1,0 +1,30 @@
+.embedpage {
+  background: #151d28;
+  color: #ffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.loading {
+  position: fixed;
+}
+
+.embedinfo > h1,
+h2,
+h3 {
+  text-align: center !important;
+  display: block;
+}
+
+.embedinfo {
+  background: #151d28;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
