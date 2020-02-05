@@ -177,6 +177,10 @@ a:visited {
   background: #e1306c;
 }
 
+.fa-discord {
+  background: #7289da;
+}
+
 .results-container {
   display: flex;
   flex-flow: wrap;

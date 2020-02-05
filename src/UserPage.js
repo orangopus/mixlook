@@ -35,7 +35,15 @@ export default class UserPage extends React.Component {
     smclips: [],
     smerror: [],
     sparksLB: [],
-    embersLB: []
+    sparksLBweekly: [],
+    sparksLBmonthly: [],
+    sparksLByearly: [],
+    embersLB: [],
+    embersLBweekly: [],
+    embersLBmonthly: [],
+    embersLByearly: [],
+    discordID: [],
+    discordWidget: []
   };
 
   loadData() {
@@ -109,6 +117,27 @@ export default class UserPage extends React.Component {
       .catch(error => {
         this.setState({
           smerror: error.response.status
+        });
+      });
+  }
+
+  loadDiscordID() {
+    axios
+      .get(`https://mixer.com/api/v1/channels/${this.state.mixer.id}/discord`)
+      .then(res => {
+        this.setState({
+          discordID: res.data
+        });
+      });
+  }
+  loadDiscord() {
+    axios
+      .get(
+        `https://discordapp.com/api/guilds/${this.state.discordID}/widget.json`
+      )
+      .then(res => {
+        this.setState({
+          discordWidget: res.data
         });
       });
   }
@@ -198,6 +227,8 @@ export default class UserPage extends React.Component {
     this.interval = setInterval(() => this.loadHostData(), 1000);
     this.interval = setInterval(() => this.loadClipsData(), 1000);
     this.interval = setInterval(() => this.loadLeaderboard(), 1000);
+    this.interval = setInterval(() => this.loadDiscordID(), 1000);
+    this.interval = setInterval(() => this.loadDiscord(), 5000);
   }
 
   componentWillUnmount() {
@@ -642,6 +673,30 @@ export default class UserPage extends React.Component {
     let overlay;
 
     if (socials) {
+      let discord;
+      if (this.state.discordID.length != 0) {
+        discord = (
+          <Tooltip
+            placement="right"
+            overlay={
+              <iframe
+                src={`https://discordapp.com/widget?id=${this.state.discordWidget.id}&theme=dark`}
+                width="350"
+                height="500"
+                allowtransparency="true"
+                frameborder="0"
+              ></iframe>
+            }
+          >
+            <a target="_blank" href={this.state.discordWidget.instant_invite}>
+              <i class="fab fa-discord"></i>
+            </a>
+          </Tooltip>
+        );
+      } else if ((this.state.discordID.length = 0)) {
+        discord = " ";
+      }
+
       let twitter;
       if (socials.twitter) {
         twitter = (
@@ -790,6 +845,7 @@ export default class UserPage extends React.Component {
           {soundcloud}
           {steam}
           {patreon}
+          {discord}
           {embed}
         </div>
       );
