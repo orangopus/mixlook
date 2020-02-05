@@ -28,7 +28,7 @@ export default class UserPage extends React.Component {
     type: [],
     social: [],
     steam: [],
-    color: "#1fbaed",
+    color: "#fff",
     hosteeName: [],
     hosteeAvatar: [],
     clips: [],
@@ -776,10 +776,10 @@ export default class UserPage extends React.Component {
       );
     }
 
-    var currentlyplaying = " ";
+    let currentlyplaying;
     if (this.state.type !== null) {
-      currentlyplaying = "Currently playing " + gameTitle;
       var gameTitle = this.state.type.name;
+      currentlyplaying = "Currently playing " + gameTitle;
       if (gameTitle === "Programming") {
         currentlyplaying = "Programming 👨‍💻";
       } else if (gameTitle === "Music" || gameTitle === "Radio") {
