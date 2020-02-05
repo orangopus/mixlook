@@ -261,7 +261,7 @@ table {
   background: #fff;
   border-color: #aaa;
   color: black;
-  border-radius: 25px;
+  border-radius: 25px !important;
 }
 
 .react-tabs__tab-list {
