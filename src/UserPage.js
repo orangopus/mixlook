@@ -133,7 +133,7 @@ export default class UserPage extends React.Component {
   loadDiscord() {
     axios
       .get(
-        `https://discordapp.com/api/guilds/${this.state.discordID.guildId}/widget.json`
+        `https://cors-anywhere.herokuapp.com/https://discordapp.com/api/guilds/${this.state.discordID.guildId}/widget.json`
       )
       .then(res => {
         this.setState({
@@ -228,7 +228,7 @@ export default class UserPage extends React.Component {
     this.interval = setInterval(() => this.loadClipsData(), 1000);
     this.interval = setInterval(() => this.loadLeaderboard(), 1000);
     this.interval = setInterval(() => this.loadDiscordID(), 1000);
-    this.interval = setInterval(() => this.loadDiscord(), 5000);
+    this.interval = setInterval(() => this.loadDiscord(), 1000);
   }
 
   componentWillUnmount() {
@@ -676,18 +676,7 @@ export default class UserPage extends React.Component {
       let discord;
       if (this.state.discordID.length != 0) {
         discord = (
-          <Tooltip
-            placement="right"
-            overlay={
-              <iframe
-                src={`https://discordapp.com/widget?id=${this.state.discordWidget.id}&theme=dark`}
-                width="350"
-                height="500"
-                allowtransparency="true"
-                frameborder="0"
-              ></iframe>
-            }
-          >
+          <Tooltip placement="right" overlay={`Connect to Discord`}>
             <a target="_blank" href={this.state.discordWidget.instant_invite}>
               <i class="fab fa-discord"></i>
             </a>
