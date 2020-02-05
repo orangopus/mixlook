@@ -227,6 +227,54 @@ a:hover {
   color: white;
 }
 
+.sparksBoard {
+  width: 48%;
+  margin: 13px 0 40px 0;
+}
+
+.title {
+  padding-top: 30px;
+}
+
+.subtitle {
+  padding-bottom: 20px;
+}
+
+.spacer {
+  margin-bottom: 30px;
+}
+
+table {
+  margin: 0px 0px 15px 31px;
+  width: 85%;
+}
+
+.LBitem {
+  height: 60px;
+}
+
+.sparksBoardRight {
+  margin-left: 53px;
+}
+
+.LBamount {
+  text-align: right;
+  padding-left: 20px;
+  font-size: 25px;
+}
+
+.LBusername {
+  text-align: left;
+  padding-left: 10px;
+  font-size: 25px;
+}
+
+.sparksAvatar {
+  height: 50px;
+  padding-left: 10px;
+  border-radius: 100px;
+}
+
 .scspan {
   background: none;
   padding: 0;

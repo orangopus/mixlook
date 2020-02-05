@@ -32,7 +32,9 @@ export default class UserPage extends React.Component {
     hosteeAvatar: [],
     clips: [],
     smclips: [],
-    smerror: []
+    smerror: [],
+    sparksLB: [],
+    embersLB: []
   };
 
   loadData() {
@@ -110,12 +112,34 @@ export default class UserPage extends React.Component {
       });
   }
 
+  loadLeaderboard() {
+    axios
+      .get(
+        `https://mixer.com/api/v2/leaderboards/sparks-alltime/channels/${this.state.mixer.id}`
+      )
+      .then(res => {
+        this.setState({
+          sparksLB: res.data
+        });
+      });
+    axios
+      .get(
+        `https://mixer.com/api/v2/leaderboards/embers-alltime/channels/${this.state.mixer.id}`
+      )
+      .then(res => {
+        this.setState({
+          embersLB: res.data
+        });
+      });
+  }
+
   componentDidMount() {
     demoAsyncCall().then(() => this.setState({ loading: false }));
     this.interval = setInterval(() => this.loadData(), 1000);
     this.interval = setInterval(() => this.loadUserData(), 1000);
     this.interval = setInterval(() => this.loadHostData(), 1000);
     this.interval = setInterval(() => this.loadClipsData(), 1000);
+    this.interval = setInterval(() => this.loadLeaderboard(), 1000);
   }
 
   componentWillUnmount() {
@@ -735,6 +759,12 @@ export default class UserPage extends React.Component {
       currentlyplaying = "Last seen playing " + this.state.type.name;
     }
 
+    var i = 1;
+    var s = 1;
+
+    var nf = new Intl.NumberFormat();
+    var statValue = nf.format(this.state.sparksLB.statValue);
+
     return (
       <div>
         <Navbar />
@@ -894,6 +924,60 @@ export default class UserPage extends React.Component {
           </div>
           {clips}
           {smclips}
+          <div className="container spacer">
+            <div className="row">
+              <div className="sparksBoard darkbox">
+                <h1 className="title">
+                  <img src="https://mixer.com/_static/img/design/ui/spark-coin/spark-coin.svg" />{" "}
+                  Sparks
+                </h1>
+                <p className="subtitle">All-time leaderboard</p>
+                <table class="tg">
+                  {this.state.sparksLB.map(spark => (
+                    <tr className="LBitem" key={spark.userId}>
+                      <th class="tg-0lax">
+                        {i++}{" "}
+                        <a href={spark.username}>
+                          <img className="sparksAvatar" src={spark.avatarUrl} />
+                        </a>
+                      </th>
+                      <th class="LBusername">
+                        <a href={spark.username}>{spark.username}</a>
+                      </th>
+                      <th class="LBamount">
+                        {spark.statValue.toLocaleString("en-GB")}
+                      </th>
+                    </tr>
+                  ))}
+                </table>
+              </div>
+              <div className="sparksBoard sparksBoardRight darkbox">
+                <h1 className="title">
+                  <img src="https://mixer.com/_static/img/design/ui/embers/ember_24.png" />{" "}
+                  Embers
+                </h1>
+                <p className="subtitle">All-time leaderboard</p>
+                <table class="tg">
+                  {this.state.embersLB.map(ember => (
+                    <tr className="LBitem" key={ember.userId}>
+                      <th class="tg-0lax">
+                        {s++}{" "}
+                        <a href={ember.username}>
+                          <img className="sparksAvatar" src={ember.avatarUrl} />
+                        </a>
+                      </th>
+                      <th class="LBusername">
+                        <a href={ember.username}>{ember.username}</a>
+                      </th>
+                      <th class="LBamount">
+                        {ember.statValue.toLocaleString("en-GB")}
+                      </th>
+                    </tr>
+                  ))}
+                </table>
+              </div>
+            </div>
+          </div>
           <div className="container darkbox">
             <h1 className="abouttitle">About {this.state.mixer.token}</h1>
             <div
