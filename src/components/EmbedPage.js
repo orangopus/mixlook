@@ -110,26 +110,39 @@ export default class EmbedPage extends React.Component {
 
     let overlay;
 
-    var gameTitle = this.state.type.name;
     let currentlyplaying;
-    if (this.state.type === null) {
-      currentlyplaying = "Currently playing nothing...";
-    } else if (gameTitle === "Programming") {
-      currentlyplaying = "Programming 👨‍💻";
-    } else if (gameTitle === "Music" || gameTitle === "Radio") {
-      currentlyplaying = "Playing Music 🎶";
-    } else if (gameTitle === "Development") {
-      currentlyplaying = "Developing 👨‍💻";
-    } else if (gameTitle === "Web Show") {
-      currentlyplaying = "Hosting a Web Show 📺";
-    } else if (gameTitle === "Creative") {
-      currentlyplaying = "Being Creative 🎨";
-    } else {
+    if (this.state.type !== null) {
+      var gameTitle = this.state.type.name;
       currentlyplaying = "Currently playing " + gameTitle;
+      if (gameTitle === "Programming") {
+        currentlyplaying = "Programming 👨‍💻";
+      } else if (gameTitle === "Music" || gameTitle === "Radio") {
+        currentlyplaying = "Playing Music 🎶";
+      } else if (gameTitle === "Development") {
+        currentlyplaying = "Developing 👨‍💻";
+      } else if (gameTitle === "Web Show") {
+        currentlyplaying = "Hosting a Web Show 📺";
+      } else if (gameTitle === "Creative") {
+        currentlyplaying = "Being Creative 🎨";
+      }
+    } else if (this.state.type === null) {
+      currentlyplaying = "Currently playing nothing...";
     }
 
     if (this.state.mixer.online === false) {
-      currentlyplaying = "Last seen playing " + this.state.type.name;
+      if (gameTitle === undefined) {
+        currentlyplaying = "Last seen playing nothing...";
+      } else {
+        currentlyplaying = "Last seen playing " + gameTitle;
+      }
+    }
+
+    var coverUrl;
+
+    if (this.state.type) {
+      coverUrl = this.state.type.coverUrl;
+    } else {
+      coverUrl = "https://i.imgur.com/JYgnFhN.png";
     }
 
     return (
@@ -149,10 +162,8 @@ export default class EmbedPage extends React.Component {
             <h1 className="username">{this.state.mixer.token}</h1>
             <h1 className="followers">{followers} followers</h1>
             <Tooltip
-              placement="bottom"
-              overlay={
-                <img className="gameitem" src={this.state.type.coverUrl}></img>
-              }
+              placement="right"
+              overlay={<img className="gameitem" src={coverUrl}></img>}
             >
               <h1>{currentlyplaying}</h1>
             </Tooltip>
