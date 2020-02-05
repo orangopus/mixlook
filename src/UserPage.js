@@ -776,26 +776,39 @@ export default class UserPage extends React.Component {
       );
     }
 
-    var gameTitle = this.state.type.name;
-    let currentlyplaying;
-    if (this.state.type === null) {
-      currentlyplaying = "Currently playing nothing...";
-    } else if (gameTitle === "Programming") {
-      currentlyplaying = "Programming 👨‍💻";
-    } else if (gameTitle === "Music" || gameTitle === "Radio") {
-      currentlyplaying = "Playing Music 🎶";
-    } else if (gameTitle === "Development") {
-      currentlyplaying = "Developing 👨‍💻";
-    } else if (gameTitle === "Web Show") {
-      currentlyplaying = "Hosting a Web Show 📺";
-    } else if (gameTitle === "Creative") {
-      currentlyplaying = "Being Creative 🎨";
-    } else {
+    var currentlyplaying = " ";
+    if (this.state.type !== null) {
       currentlyplaying = "Currently playing " + gameTitle;
+      var gameTitle = this.state.type.name;
+      if (gameTitle === "Programming") {
+        currentlyplaying = "Programming 👨‍💻";
+      } else if (gameTitle === "Music" || gameTitle === "Radio") {
+        currentlyplaying = "Playing Music 🎶";
+      } else if (gameTitle === "Development") {
+        currentlyplaying = "Developing 👨‍💻";
+      } else if (gameTitle === "Web Show") {
+        currentlyplaying = "Hosting a Web Show 📺";
+      } else if (gameTitle === "Creative") {
+        currentlyplaying = "Being Creative 🎨";
+      }
+    } else if (this.state.type === null) {
+      currentlyplaying = "Currently playing nothing...";
     }
 
     if (this.state.mixer.online === false) {
-      currentlyplaying = "Last seen playing " + this.state.type.name;
+      if (gameTitle === undefined) {
+        currentlyplaying = "Last seen playing nothing...";
+      } else {
+        currentlyplaying = "Last seen playing " + gameTitle;
+      }
+    }
+
+    let coverUrl;
+
+    if (this.state.type === "null") {
+      coverUrl = this.state.type.coverUrl;
+    } else {
+      coverUrl = "hai";
     }
 
     var i = 1;
@@ -836,12 +849,7 @@ export default class UserPage extends React.Component {
                 <h1 className="followers">{followers} followers</h1>
                 <Tooltip
                   placement="right"
-                  overlay={
-                    <img
-                      className="gameitem"
-                      src={this.state.type.coverUrl}
-                    ></img>
-                  }
+                  overlay={<img className="gameitem" src={coverUrl}></img>}
                 >
                   <h1 className="playing">{currentlyplaying}</h1>
                 </Tooltip>
@@ -1057,6 +1065,7 @@ export default class UserPage extends React.Component {
                   <img src="https://mixer.com/_static/img/design/ui/embers/ember_24.png" />{" "}
                   Embers
                 </h1>
+
                 <Tabs>
                   <TabList>
                     <Tab>Weekly</Tab>
