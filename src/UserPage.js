@@ -803,12 +803,12 @@ export default class UserPage extends React.Component {
       }
     }
 
-    let coverUrl;
+    var coverUrl;
 
-    if (this.state.type === "null") {
+    if (this.state.type) {
       coverUrl = this.state.type.coverUrl;
     } else {
-      coverUrl = "hai";
+      coverUrl = "https://i.imgur.com/JYgnFhN.png";
     }
 
     var i = 1;
