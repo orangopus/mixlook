@@ -938,7 +938,10 @@ export default class UserPage extends React.Component {
                       <th class="tg-0lax">
                         {i++}{" "}
                         <a href={spark.username}>
-                          <img className="sparksAvatar" src={spark.avatarUrl} />
+                          <img
+                            className="sparksAvatar"
+                            src={`https://mixer.com/api/v1/users/${spark.userId}/avatar`}
+                          />
                         </a>
                       </th>
                       <th class="LBusername">
@@ -963,7 +966,10 @@ export default class UserPage extends React.Component {
                       <th class="tg-0lax">
                         {s++}{" "}
                         <a href={ember.username}>
-                          <img className="sparksAvatar" src={ember.avatarUrl} />
+                          <img
+                            className="sparksAvatar"
+                            src={`https://mixer.com/api/v1/users/${ember.userId}/avatar`}
+                          />
                         </a>
                       </th>
                       <th class="LBusername">
