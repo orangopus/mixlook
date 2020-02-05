@@ -257,6 +257,27 @@ table {
   margin-left: 53px;
 }
 
+.react-tabs__tab--selected {
+  background: #fff;
+  border-color: #aaa;
+  color: black;
+  border-radius: 25px;
+}
+
+.react-tabs__tab-list {
+  border-bottom: none !important;
+}
+
+.react-tabs__tab-list {
+  border-bottom: 1px solid #aaa;
+  margin: 0 0 10px;
+  padding: 0;
+  background: #121218;
+  max-width: 100%;
+  display: inline-block;
+  border-radius: 100px;
+}
+
 .LBamount {
   text-align: right;
   padding-left: 20px;

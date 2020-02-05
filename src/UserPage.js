@@ -11,7 +11,8 @@ import { faHome, faGreaterThanEqual } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Tooltip from "rc-tooltip";
 import "rc-tooltip/assets/bootstrap.css";
-
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
 import { render } from "@testing-library/react";
 
@@ -124,11 +125,49 @@ export default class UserPage extends React.Component {
       });
     axios
       .get(
+        `https://mixer.com/api/v2/leaderboards/sparks-monthly/channels/${this.state.mixer.id}`
+      )
+      .then(res => {
+        this.setState({
+          sparksLBmonthly: res.data
+        });
+      });
+
+    axios
+      .get(
+        `https://mixer.com/api/v2/leaderboards/sparks-weekly/channels/${this.state.mixer.id}`
+      )
+      .then(res => {
+        this.setState({
+          sparksLBweekly: res.data
+        });
+      });
+
+    axios
+      .get(
         `https://mixer.com/api/v2/leaderboards/embers-alltime/channels/${this.state.mixer.id}`
       )
       .then(res => {
         this.setState({
           embersLB: res.data
+        });
+      });
+    axios
+      .get(
+        `https://mixer.com/api/v2/leaderboards/embers-weekly/channels/${this.state.mixer.id}`
+      )
+      .then(res => {
+        this.setState({
+          embersLBweekly: res.data
+        });
+      });
+    axios
+      .get(
+        `https://mixer.com/api/v2/leaderboards/embers-monthly/channels/${this.state.mixer.id}`
+      )
+      .then(res => {
+        this.setState({
+          embersLBmonthly: res.data
         });
       });
   }
@@ -760,7 +799,11 @@ export default class UserPage extends React.Component {
     }
 
     var i = 1;
+    var ii = 1;
+    var iii = 1;
     var s = 1;
+    var ss = 1;
+    var sss = 1;
 
     var nf = new Intl.NumberFormat();
     var statValue = nf.format(this.state.sparksLB.statValue);
@@ -931,56 +974,167 @@ export default class UserPage extends React.Component {
                   <img src="https://mixer.com/_static/img/design/ui/spark-coin/spark-coin.svg" />{" "}
                   Sparks
                 </h1>
-                <p className="subtitle">All-time leaderboard</p>
-                <table class="tg">
-                  {this.state.sparksLB.map(spark => (
-                    <tr className="LBitem" key={spark.userId}>
-                      <th class="tg-0lax">
-                        {i++}{" "}
-                        <a href={spark.username}>
-                          <img
-                            className="sparksAvatar"
-                            src={`https://mixer.com/api/v1/users/${spark.userId}/avatar`}
-                          />
-                        </a>
-                      </th>
-                      <th class="LBusername">
-                        <a href={spark.username}>{spark.username}</a>
-                      </th>
-                      <th class="LBamount">
-                        {spark.statValue.toLocaleString("en-GB")}
-                      </th>
-                    </tr>
-                  ))}
-                </table>
+                <Tabs>
+                  <TabList>
+                    <Tab>Weekly</Tab>
+                    <Tab>Monthly</Tab>
+                    <Tab>All-Time</Tab>
+                  </TabList>
+
+                  <TabPanel>
+                    <table class="tg">
+                      {this.state.sparksLBweekly.map(spark => (
+                        <tr className="LBitem" key={spark.userId}>
+                          <th class="tg-0lax">
+                            {ii++}{" "}
+                            <a href={spark.username}>
+                              <img
+                                className="sparksAvatar"
+                                src={`https://mixer.com/api/v1/users/${spark.userId}/avatar`}
+                              />
+                            </a>
+                          </th>
+                          <th class="LBusername">
+                            <a href={spark.username}>{spark.username}</a>
+                          </th>
+                          <th class="LBamount">
+                            {spark.statValue.toLocaleString("en-GB")}
+                          </th>
+                        </tr>
+                      ))}
+                    </table>
+                  </TabPanel>
+                  <TabPanel>
+                    <table class="tg">
+                      {this.state.sparksLBmonthly.map(spark => (
+                        <tr className="LBitem" key={spark.userId}>
+                          <th class="tg-0lax">
+                            {iii++}{" "}
+                            <a href={spark.username}>
+                              <img
+                                className="sparksAvatar"
+                                src={`https://mixer.com/api/v1/users/${spark.userId}/avatar`}
+                              />
+                            </a>
+                          </th>
+                          <th class="LBusername">
+                            <a href={spark.username}>{spark.username}</a>
+                          </th>
+                          <th class="LBamount">
+                            {spark.statValue.toLocaleString("en-GB")}
+                          </th>
+                        </tr>
+                      ))}
+                    </table>
+                  </TabPanel>
+                  <TabPanel>
+                    <table class="tg">
+                      {this.state.sparksLB.map(spark => (
+                        <tr className="LBitem" key={spark.userId}>
+                          <th class="tg-0lax">
+                            {i++}{" "}
+                            <a href={spark.username}>
+                              <img
+                                className="sparksAvatar"
+                                src={`https://mixer.com/api/v1/users/${spark.userId}/avatar`}
+                              />
+                            </a>
+                          </th>
+                          <th class="LBusername">
+                            <a href={spark.username}>{spark.username}</a>
+                          </th>
+                          <th class="LBamount">
+                            {spark.statValue.toLocaleString("en-GB")}
+                          </th>
+                        </tr>
+                      ))}
+                    </table>
+                  </TabPanel>
+                </Tabs>
               </div>
               <div className="sparksBoard sparksBoardRight darkbox">
                 <h1 className="title">
                   <img src="https://mixer.com/_static/img/design/ui/embers/ember_24.png" />{" "}
                   Embers
                 </h1>
-                <p className="subtitle">All-time leaderboard</p>
-                <table class="tg">
-                  {this.state.embersLB.map(ember => (
-                    <tr className="LBitem" key={ember.userId}>
-                      <th class="tg-0lax">
-                        {s++}{" "}
-                        <a href={ember.username}>
-                          <img
-                            className="sparksAvatar"
-                            src={`https://mixer.com/api/v1/users/${ember.userId}/avatar`}
-                          />
-                        </a>
-                      </th>
-                      <th class="LBusername">
-                        <a href={ember.username}>{ember.username}</a>
-                      </th>
-                      <th class="LBamount">
-                        {ember.statValue.toLocaleString("en-GB")}
-                      </th>
-                    </tr>
-                  ))}
-                </table>
+                <Tabs>
+                  <TabList>
+                    <Tab>Weekly</Tab>
+                    <Tab>Monthly</Tab>
+                    <Tab>All-Time</Tab>
+                  </TabList>
+
+                  <TabPanel>
+                    <table class="tg">
+                      {this.state.embersLBweekly.map(ember => (
+                        <tr className="LBitem" key={ember.userId}>
+                          <th class="tg-0lax">
+                            {ss++}{" "}
+                            <a href={ember.username}>
+                              <img
+                                className="sparksAvatar"
+                                src={`https://mixer.com/api/v1/users/${ember.userId}/avatar`}
+                              />
+                            </a>
+                          </th>
+                          <th class="LBusername">
+                            <a href={ember.username}>{ember.username}</a>
+                          </th>
+                          <th class="LBamount">
+                            {ember.statValue.toLocaleString("en-GB")}
+                          </th>
+                        </tr>
+                      ))}
+                    </table>
+                  </TabPanel>
+                  <TabPanel>
+                    <table class="tg">
+                      {this.state.embersLBmonthly.map(ember => (
+                        <tr className="LBitem" key={ember.userId}>
+                          <th class="tg-0lax">
+                            {sss++}{" "}
+                            <a href={ember.username}>
+                              <img
+                                className="sparksAvatar"
+                                src={`https://mixer.com/api/v1/users/${ember.userId}/avatar`}
+                              />
+                            </a>
+                          </th>
+                          <th class="LBusername">
+                            <a href={ember.username}>{ember.username}</a>
+                          </th>
+                          <th class="LBamount">
+                            {ember.statValue.toLocaleString("en-GB")}
+                          </th>
+                        </tr>
+                      ))}
+                    </table>
+                  </TabPanel>
+
+                  <TabPanel>
+                    <table class="tg">
+                      {this.state.embersLB.map(ember => (
+                        <tr className="LBitem" key={ember.userId}>
+                          <th class="tg-0lax">
+                            {s++}{" "}
+                            <a href={ember.username}>
+                              <img
+                                className="sparksAvatar"
+                                src={`https://mixer.com/api/v1/users/${ember.userId}/avatar`}
+                              />
+                            </a>
+                          </th>
+                          <th class="LBusername">
+                            <a href={ember.username}>{ember.username}</a>
+                          </th>
+                          <th class="LBamount">
+                            {ember.statValue.toLocaleString("en-GB")}
+                          </th>
+                        </tr>
+                      ))}
+                    </table>
+                  </TabPanel>
+                </Tabs>
               </div>
             </div>
           </div>
