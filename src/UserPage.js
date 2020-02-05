@@ -145,6 +145,16 @@ export default class UserPage extends React.Component {
 
     axios
       .get(
+        `https://mixer.com/api/v2/leaderboards/sparks-yearly/channels/${this.state.mixer.id}`
+      )
+      .then(res => {
+        this.setState({
+          sparksLByearly: res.data
+        });
+      });
+
+    axios
+      .get(
         `https://mixer.com/api/v2/leaderboards/embers-alltime/channels/${this.state.mixer.id}`
       )
       .then(res => {
@@ -168,6 +178,15 @@ export default class UserPage extends React.Component {
       .then(res => {
         this.setState({
           embersLBmonthly: res.data
+        });
+      });
+    axios
+      .get(
+        `https://mixer.com/api/v2/leaderboards/embers-yearly/channels/${this.state.mixer.id}`
+      )
+      .then(res => {
+        this.setState({
+          embersLByearly: res.data
         });
       });
   }
@@ -986,6 +1005,7 @@ export default class UserPage extends React.Component {
                   <TabList>
                     <Tab>Weekly</Tab>
                     <Tab>Monthly</Tab>
+                    <Tab>Yearly</Tab>
                     <Tab>All-Time</Tab>
                   </TabList>
 
@@ -1015,6 +1035,29 @@ export default class UserPage extends React.Component {
                   <TabPanel>
                     <table class="tg">
                       {this.state.sparksLBmonthly.map(spark => (
+                        <tr className="LBitem" key={spark.userId}>
+                          <th class="tg-0lax">
+                            {iii++}{" "}
+                            <a href={spark.username}>
+                              <img
+                                className="sparksAvatar"
+                                src={`https://mixer.com/api/v1/users/${spark.userId}/avatar`}
+                              />
+                            </a>
+                          </th>
+                          <th class="LBusername">
+                            <a href={spark.username}>{spark.username}</a>
+                          </th>
+                          <th class="LBamount">
+                            {spark.statValue.toLocaleString("en-GB")}
+                          </th>
+                        </tr>
+                      ))}
+                    </table>
+                  </TabPanel>
+                  <TabPanel>
+                    <table class="tg">
+                      {this.state.sparksLByearly.map(spark => (
                         <tr className="LBitem" key={spark.userId}>
                           <th class="tg-0lax">
                             {iii++}{" "}
@@ -1070,6 +1113,7 @@ export default class UserPage extends React.Component {
                   <TabList>
                     <Tab>Weekly</Tab>
                     <Tab>Monthly</Tab>
+                    <Tab>Yearly</Tab>
                     <Tab>All-Time</Tab>
                   </TabList>
 
@@ -1119,7 +1163,29 @@ export default class UserPage extends React.Component {
                       ))}
                     </table>
                   </TabPanel>
-
+                  <TabPanel>
+                    <table class="tg">
+                      {this.state.embersLByearly.map(ember => (
+                        <tr className="LBitem" key={ember.userId}>
+                          <th class="tg-0lax">
+                            {sss++}{" "}
+                            <a href={ember.username}>
+                              <img
+                                className="sparksAvatar"
+                                src={`https://mixer.com/api/v1/users/${ember.userId}/avatar`}
+                              />
+                            </a>
+                          </th>
+                          <th class="LBusername">
+                            <a href={ember.username}>{ember.username}</a>
+                          </th>
+                          <th class="LBamount">
+                            {ember.statValue.toLocaleString("en-GB")}
+                          </th>
+                        </tr>
+                      ))}
+                    </table>
+                  </TabPanel>
                   <TabPanel>
                     <table class="tg">
                       {this.state.embersLB.map(ember => (
