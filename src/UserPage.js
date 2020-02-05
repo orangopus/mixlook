@@ -133,7 +133,7 @@ export default class UserPage extends React.Component {
   loadDiscord() {
     axios
       .get(
-        `https://discordapp.com/api/guilds/${this.state.discordID}/widget.json`
+        `https://discordapp.com/api/guilds/${this.state.discordID.guildId}/widget.json`
       )
       .then(res => {
         this.setState({
