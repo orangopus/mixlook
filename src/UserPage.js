@@ -833,9 +833,11 @@ export default class UserPage extends React.Component {
     var i = 1;
     var ii = 1;
     var iii = 1;
+    var iiii = 1;
     var s = 1;
     var ss = 1;
     var sss = 1;
+    var ssss = 1;
 
     var nf = new Intl.NumberFormat();
     var statValue = nf.format(this.state.sparksLB.statValue);
@@ -1014,7 +1016,7 @@ export default class UserPage extends React.Component {
                       {this.state.sparksLBweekly.map(spark => (
                         <tr className="LBitem" key={spark.userId}>
                           <th class="tg-0lax">
-                            {ii++}{" "}
+                            {i++}{" "}
                             <a href={spark.username}>
                               <img
                                 className="sparksAvatar"
@@ -1037,7 +1039,7 @@ export default class UserPage extends React.Component {
                       {this.state.sparksLBmonthly.map(spark => (
                         <tr className="LBitem" key={spark.userId}>
                           <th class="tg-0lax">
-                            {iii++}{" "}
+                            {ii++}{" "}
                             <a href={spark.username}>
                               <img
                                 className="sparksAvatar"
@@ -1083,7 +1085,7 @@ export default class UserPage extends React.Component {
                       {this.state.sparksLB.map(spark => (
                         <tr className="LBitem" key={spark.userId}>
                           <th class="tg-0lax">
-                            {i++}{" "}
+                            {iiii++}{" "}
                             <a href={spark.username}>
                               <img
                                 className="sparksAvatar"
@@ -1122,7 +1124,7 @@ export default class UserPage extends React.Component {
                       {this.state.embersLBweekly.map(ember => (
                         <tr className="LBitem" key={ember.userId}>
                           <th class="tg-0lax">
-                            {ss++}{" "}
+                            {s++}{" "}
                             <a href={ember.username}>
                               <img
                                 className="sparksAvatar"
@@ -1145,7 +1147,7 @@ export default class UserPage extends React.Component {
                       {this.state.embersLBmonthly.map(ember => (
                         <tr className="LBitem" key={ember.userId}>
                           <th class="tg-0lax">
-                            {sss++}{" "}
+                            {ss++}{" "}
                             <a href={ember.username}>
                               <img
                                 className="sparksAvatar"
@@ -1191,7 +1193,7 @@ export default class UserPage extends React.Component {
                       {this.state.embersLB.map(ember => (
                         <tr className="LBitem" key={ember.userId}>
                           <th class="tg-0lax">
-                            {s++}{" "}
+                            {ssss++}{" "}
                             <a href={ember.username}>
                               <img
                                 className="sparksAvatar"
