@@ -161,12 +161,7 @@ export default class EmbedPage extends React.Component {
             />
             <h1 className="username">{this.state.mixer.token}</h1>
             <h1 className="followers">{followers} followers</h1>
-            <Tooltip
-              placement="right"
-              overlay={<img className="gameitem" src={coverUrl}></img>}
-            >
-              <h1>{currentlyplaying}</h1>
-            </Tooltip>
+            <h1>{currentlyplaying}</h1>
           </div>
         </div>
       </div>
