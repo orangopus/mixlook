@@ -205,7 +205,7 @@ export default class UserPage extends React.Component {
     this.interval = setInterval(() => this.loadData(), 1000);
     this.interval = setInterval(() => this.loadUserData(), 1000);
     this.interval = setInterval(() => this.loadHostData(), 1000);
-    this.interval = setInterval(() => this.loadClipsData(), 1000);
+    this.interval = setInterval(() => this.loadClipsData(), 2000);
     this.interval = setInterval(() => this.loadLeaderboard(), 1000);
   }
 
@@ -283,7 +283,7 @@ export default class UserPage extends React.Component {
         smclips = <div style={{ marginTop: "100px" }}></div>;
       }
 
-      if (this.state.smclips.length > 1) {
+      if (this.state.smclips.length > 0) {
         console.log(this.state.smclips);
         smclips = (
           <div className="maxed">
@@ -324,7 +324,7 @@ export default class UserPage extends React.Component {
 
     var clips;
     if (this.state.mixer.partnered === true) {
-      if (this.state.clips.length > 2) {
+      if (this.state.clips.length > 0) {
         clips = (
           <div className="maxed">
             <Carousel
