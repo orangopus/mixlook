@@ -205,7 +205,7 @@ export default class UserPage extends React.Component {
     this.interval = setInterval(() => this.loadData(), 1000);
     this.interval = setInterval(() => this.loadUserData(), 1000);
     this.interval = setInterval(() => this.loadHostData(), 1000);
-    this.interval = setInterval(() => this.loadClipsData(), 2000);
+    this.interval = setInterval(() => this.loadClipsData(), 1000);
     this.interval = setInterval(() => this.loadLeaderboard(), 1000);
   }
 
