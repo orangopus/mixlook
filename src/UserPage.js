@@ -893,7 +893,7 @@ export default class UserPage extends React.Component {
                   </TabList>
                   <TabPanel>
                     {noweeklydata}
-                    <table class="tg">
+                    <table class="tg lbtable">
                       {this.state.sparksLBweekly.map(spark => (
                         <tr className="LBitem" key={spark.userId}>
                           <th class="tg-0lax">
@@ -917,7 +917,7 @@ export default class UserPage extends React.Component {
                   </TabPanel>
                   <TabPanel>
                     {nomonthlydata}
-                    <table class="tg">
+                    <table class="tg lbtable">
                       {this.state.sparksLBmonthly.map(spark => (
                         <tr className="LBitem" key={spark.userId}>
                           <th class="tg-0lax">
@@ -941,7 +941,7 @@ export default class UserPage extends React.Component {
                   </TabPanel>
                   <TabPanel>
                     {noyearlydata}
-                    <table class="tg">
+                    <table class="tg lbtable">
                       {this.state.sparksLByearly.map(spark => (
                         <tr className="LBitem" key={spark.userId}>
                           <th class="tg-0lax">
@@ -965,7 +965,7 @@ export default class UserPage extends React.Component {
                   </TabPanel>
                   <TabPanel>
                     {nolbdata}
-                    <table class="tg">
+                    <table class="tg lbtable">
                       {this.state.sparksLB.map(spark => (
                         <tr className="LBitem" key={spark.userId}>
                           <th class="tg-0lax">
@@ -1005,7 +1005,7 @@ export default class UserPage extends React.Component {
 
                   <TabPanel>
                     {noweeklydataE}
-                    <table class="tg">
+                    <table class="tg lbtable">
                       {this.state.embersLBweekly.map(ember => (
                         <tr className="LBitem" key={ember.userId}>
                           <th class="tg-0lax">
@@ -1029,7 +1029,7 @@ export default class UserPage extends React.Component {
                   </TabPanel>
                   <TabPanel>
                     {nomonthlydataE}
-                    <table class="tg">
+                    <table class="tg lbtable">
                       {this.state.embersLBmonthly.map(ember => (
                         <tr className="LBitem" key={ember.userId}>
                           <th class="tg-0lax">
@@ -1053,7 +1053,7 @@ export default class UserPage extends React.Component {
                   </TabPanel>
                   <TabPanel>
                     {noyearlydataE}
-                    <table class="tg">
+                    <table class="tg lbtable">
                       {this.state.embersLByearly.map(ember => (
                         <tr className="LBitem" key={ember.userId}>
                           <th class="tg-0lax">
@@ -1077,7 +1077,7 @@ export default class UserPage extends React.Component {
                   </TabPanel>
                   <TabPanel>
                     {nolbdataE}
-                    <table class="tg">
+                    <table class="tg lbtable">
                       {this.state.embersLB.map(ember => (
                         <tr className="LBitem" key={ember.userId}>
                           <th class="tg-0lax">
