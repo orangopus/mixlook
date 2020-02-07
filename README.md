@@ -9,19 +9,26 @@ Mixlook 2.0 is an entire overhaul of the legacy version. We're rewriting this in
 
 - Lookup profiles and watch livestreams
 - Sleek new interface
-- Powered by React
+- Powered by React & Dynamic updates in real-time
 - Direct profile links to your favourite Mixer streamers!
 - Sleek and smart dynamic embeds for your website!
+- View your clips from Mixer and SmartClips
+- Social buttons!
+- Sparks & Embers Leaderboards
+- About sections
 
 ## Planned Features
 
-- [ ] Customise the colour of your page. You will also see any lint errors in the console.
-- [x] Brand new design
+- [ ] Customise the look and feel of your page
 - [ ] Can be ran locally or server-based. (For those who like to tinker with things)
-- [x] React (of course!)
+- [ ] Mixlook Dashboard
+- [ ] Custom Domains
+- [ ] Donation URLs (in alpha)
+
+## Mixlook Companion App
+
 - [ ] Razer Chroma Integration
-- [ ] Donation URLs
-- [ ] Mixer Rich Presence
+- [x] [Mixer Rich Presence](https://github.com/orangopus/mixer-rich-presence)
 
 ## Feedback
 
