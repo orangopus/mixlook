@@ -181,6 +181,16 @@ a:visited {
   background: #7289da;
 }
 
+.react-tabs__tab-list {
+  border-bottom: none;
+  margin-top: 10px !important;
+}
+
+.react-tabs__tab-panel > p {
+  font-size: 15px;
+  padding: 10px;
+}
+
 .fa-chevron-left,
 .fa-chevron-right {
   background: #151d28;

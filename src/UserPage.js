@@ -645,6 +645,84 @@ export default class UserPage extends React.Component {
     var nf = new Intl.NumberFormat();
     var statValue = nf.format(this.state.sparksLB.statValue);
 
+    let nolbdata;
+    let nomonthlydata;
+    let noyearlydata;
+    let noweeklydata;
+
+    if (this.state.sparksLB.length === 0) {
+      nolbdata = <p>No all-time data is available.</p>;
+    } else if (this.state.sparksLB.length !== 0) {
+      nolbdata = "";
+    }
+
+    if (this.state.sparksLBweekly.length === 0) {
+      noweeklydata = <p>No weekly data is available.</p>;
+    } else if (this.state.sparksLBweekly.length !== 0) {
+      noweeklydata = "";
+    }
+
+    if (this.state.sparksLBmonthly.length === 0) {
+      nomonthlydata = <p>No monthly data is available.</p>;
+    } else if (this.state.sparksLBmonthly.length !== 0) {
+      nomonthlydata = "";
+    }
+
+    if (this.state.sparksLByearly.length === 0) {
+      noyearlydata = <p>No yearly data is available.</p>;
+    } else if (this.state.sparksLByearly.length !== 0) {
+      noyearlydata = "";
+    }
+
+    let nolbdataE;
+    let nomonthlydataE;
+    let noyearlydataE;
+    let noweeklydataE;
+
+    if (this.state.embersLB.length === 0) {
+      nolbdataE = (
+        <p>
+          No all-time data is available or {this.state.mixer.token} isn't set up
+          for monetisation.
+        </p>
+      );
+    } else if (this.state.embersLB.length !== 0) {
+      nolbdataE = "";
+    }
+
+    if (this.state.embersLBweekly.length === 0) {
+      noweeklydataE = (
+        <p>
+          No weekly data is available or {this.state.mixer.token} isn't set up
+          for monetisation.
+        </p>
+      );
+    } else if (this.state.embersLBweekly.length !== 0) {
+      noweeklydataE = "";
+    }
+
+    if (this.state.embersLBmonthly.length === 0) {
+      nomonthlydataE = (
+        <p>
+          No monthly data is available or {this.state.mixer.token} isn't set up
+          for monetisation.
+        </p>
+      );
+    } else if (this.state.embersLBmonthly.length !== 0) {
+      nomonthlydataE = "";
+    }
+
+    if (this.state.embersLByearly.length === 0) {
+      noyearlydataE = (
+        <p>
+          No yearly data is available or {this.state.mixer.token} isn't set up
+          for monetisation.
+        </p>
+      );
+    } else if (this.state.embersLByearly.length !== 0) {
+      noyearlydataE = "";
+    }
+
     return (
       <div>
         <Navbar />
@@ -813,8 +891,8 @@ export default class UserPage extends React.Component {
                     <Tab>Yearly</Tab>
                     <Tab>All-Time</Tab>
                   </TabList>
-
                   <TabPanel>
+                    {noweeklydata}
                     <table class="tg">
                       {this.state.sparksLBweekly.map(spark => (
                         <tr className="LBitem" key={spark.userId}>
@@ -838,6 +916,7 @@ export default class UserPage extends React.Component {
                     </table>
                   </TabPanel>
                   <TabPanel>
+                    {nomonthlydata}
                     <table class="tg">
                       {this.state.sparksLBmonthly.map(spark => (
                         <tr className="LBitem" key={spark.userId}>
@@ -861,6 +940,7 @@ export default class UserPage extends React.Component {
                     </table>
                   </TabPanel>
                   <TabPanel>
+                    {noyearlydata}
                     <table class="tg">
                       {this.state.sparksLByearly.map(spark => (
                         <tr className="LBitem" key={spark.userId}>
@@ -884,6 +964,7 @@ export default class UserPage extends React.Component {
                     </table>
                   </TabPanel>
                   <TabPanel>
+                    {nolbdata}
                     <table class="tg">
                       {this.state.sparksLB.map(spark => (
                         <tr className="LBitem" key={spark.userId}>
@@ -923,6 +1004,7 @@ export default class UserPage extends React.Component {
                   </TabList>
 
                   <TabPanel>
+                    {noweeklydataE}
                     <table class="tg">
                       {this.state.embersLBweekly.map(ember => (
                         <tr className="LBitem" key={ember.userId}>
@@ -946,6 +1028,7 @@ export default class UserPage extends React.Component {
                     </table>
                   </TabPanel>
                   <TabPanel>
+                    {nomonthlydataE}
                     <table class="tg">
                       {this.state.embersLBmonthly.map(ember => (
                         <tr className="LBitem" key={ember.userId}>
@@ -969,6 +1052,7 @@ export default class UserPage extends React.Component {
                     </table>
                   </TabPanel>
                   <TabPanel>
+                    {noyearlydataE}
                     <table class="tg">
                       {this.state.embersLByearly.map(ember => (
                         <tr className="LBitem" key={ember.userId}>
@@ -992,6 +1076,7 @@ export default class UserPage extends React.Component {
                     </table>
                   </TabPanel>
                   <TabPanel>
+                    {nolbdataE}
                     <table class="tg">
                       {this.state.embersLB.map(ember => (
                         <tr className="LBitem" key={ember.userId}>
