@@ -236,6 +236,11 @@ a:visited {
   flex-flow: wrap;
 }
 
+.clips {
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
 .maxed {
   max-width: 1500px !important;
   margin: 0 auto;
