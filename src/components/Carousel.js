@@ -38,7 +38,7 @@ export default class Carousel extends React.Component {
     let imgCarousel = "imgCarousel";
 
     return (
-      <div className="container">
+      <div className="container carousel">
         <CarouselItem
           slidesPerPage={5}
           animationSpeed={1000}
