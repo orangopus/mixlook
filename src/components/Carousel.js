@@ -25,7 +25,7 @@ export default class Carousel extends React.Component {
 
   componentDidMount() {
     demoAsyncCall().then(() => this.setState({ loading: false }));
-    this.interval = setInterval(() => this.loadData(), 1000);
+    this.loadData();
   }
 
   componentWillUnmount() {
