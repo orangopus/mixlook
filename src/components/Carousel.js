@@ -1,8 +1,70 @@
 import React from "react";
-import carousel from "../assets/carousel.svg";
+import axios from "axios";
+import CarouselItem from "@brainhubeu/react-carousel";
+import "@brainhubeu/react-carousel/lib/style.css";
+import Tooltip from "rc-tooltip";
+import "rc-tooltip/assets/bootstrap.css";
 
-function Carousel() {
-  return <img className="carousel" src={carousel} />;
+export default class Carousel extends React.Component {
+  state = {
+    carousel: []
+  };
+
+  loadData() {
+    axios
+      .get(
+        "https://mixer.com/api/v1/channels?limit=5&page=0&order=online:desc,featured:true,viewersCurrent:desc,token:desc&noCount=1&scope=names"
+      )
+      .then(res => {
+        this.setState({
+          carousel: res.data
+        });
+        console.log(res.data);
+      });
+  }
+
+  componentDidMount() {
+    demoAsyncCall().then(() => this.setState({ loading: false }));
+    this.interval = setInterval(() => this.loadData(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  render() {
+    let imgNumber = 0;
+
+    let imgCarousel = "imgCarousel";
+
+    return (
+      <div className="container">
+        <CarouselItem
+          slidesPerPage={5}
+          animationSpeed={1000}
+          stopAutoPlayOnHover
+          centered
+          infinite
+          autoPlay={2000}
+        >
+          {this.state.carousel.map(c => (
+            <div key={c.id}>
+              <a href={c.token}>
+                <Tooltip placement="top" overlay={c.token}>
+                  <img
+                    className={imgCarousel + imgNumber++}
+                    src={c.user.avatarUrl}
+                  />
+                </Tooltip>
+              </a>
+            </div>
+          ))}
+        </CarouselItem>
+      </div>
+    );
+  }
 }
 
-export default Carousel;
+function demoAsyncCall() {
+  return new Promise(resolve => setTimeout(() => resolve(), 1000));
+}
