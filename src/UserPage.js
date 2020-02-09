@@ -305,7 +305,9 @@ export default class UserPage extends React.Component {
                         fallbackImage="https://i.imgur.com/LWZGkD9.png"
                         className="clipsthumb"
                       />
-                      <h1 className="clipstitle">{smclip.meta.title}</h1>
+                      <Tooltip placement="top" overlay={smclip.meta.title}>
+                        <h1 className="clipstitle">{smclip.meta.title}</h1>
+                      </Tooltip>
                     </div>
                   </a>
                 </div>
@@ -347,7 +349,9 @@ export default class UserPage extends React.Component {
                         className="clipsthumb"
                         src={clip.contentLocators[1].uri}
                       />
-                      <h1 className="clipstitle">{clip.title}</h1>
+                      <Tooltip placement="top" overlay={clip.title}>
+                        <h1 className="clipstitle">{clip.title}</h1>
+                      </Tooltip>
                     </div>
                   </a>
                 </div>

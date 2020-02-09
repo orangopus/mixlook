@@ -236,11 +236,6 @@ a:visited {
   flex-flow: wrap;
 }
 
-.clips {
-  margin-bottom: 20px;
-  margin-top: 30px;
-}
-
 .maxed {
   max-width: 1500px !important;
   margin: 0 auto;
@@ -248,6 +243,10 @@ a:visited {
 
 .clipsthumb {
   border-radius: 45px;
+}
+
+.clips {
+  margin: 40px 0;
 }
 
 .clipsviews {
@@ -276,6 +275,7 @@ a:visited {
   padding: 20px;
   font-size: 25px;
   text-overflow: ellipsis;
+  white-space: nowrap;
   overflow: hidden;
 }
 
