@@ -14,6 +14,7 @@ import { TwitterTimelineEmbed } from "react-twitter-embed";
 import Carousel from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import ImageFB from "react-image-fallback";
+import Favico from "favico.js";
 
 const apiurl = "https://mixer.com/api/v1";
 const player = "https://mixer.com/embed/player/";
@@ -54,7 +55,6 @@ export default class UserPage extends React.Component {
           user: res.data.user,
           social: res.data.user.social
         });
-        document.title = res.data.token;
         document.querySelector("link[rel*='icon']").href =
           res.data.user.avatarUrl;
         document.getElementsByClassName("gamebg")[0].style.background =
@@ -625,6 +625,27 @@ export default class UserPage extends React.Component {
       }
     }
 
+    // Title checks
+
+    let title;
+
+    var favicon = new Favico({
+      animation: "slide"
+    });
+    favicon.badge(1);
+
+    if (this.state.mixer.online === true) {
+      title = (
+        <title>
+          {`(${this.state.mixer.viewersCurrent.toLocaleString()}) ${
+            this.state.mixer.token
+          }`}
+        </title>
+      );
+    } else {
+      title = <title>{this.state.mixer.token}</title>;
+    }
+
     var coverUrl;
 
     if (this.state.type) {
@@ -726,9 +747,7 @@ export default class UserPage extends React.Component {
     return (
       <div>
         <Navbar />
-        <Helmet>
-          <title>{this.state.mixer.token}</title>
-        </Helmet>
+        <Helmet>{title}</Helmet>
         <div className="userpage">
           <div className="container userstats">
             <div className="row">

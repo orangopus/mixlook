@@ -236,6 +236,14 @@ a:visited {
   flex-flow: wrap;
 }
 
+.circletp {
+  background: transparent !important;
+}
+
+.patronimg {
+  height: 20px;
+}
+
 .maxed {
   max-width: 1500px !important;
   margin: 0 auto;
