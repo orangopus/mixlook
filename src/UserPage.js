@@ -330,28 +330,31 @@ export default class UserPage extends React.Component {
       }
     }
 
+    var clips;
+
     let obj = this.state.emotes.emoticons;
 
-    const emoted = Object.entries(obj).map(([key, value]) => {
-      return (
-        <Tooltip placement="top" overlay={key}>
-          <img
-            width="50px"
-            className="emote"
-            src={`https://emote.pixel.chat/api?source=external&pack=${this.state.emotes.url}&width=${value.width}&height=${value.height}&x=${value.x}&y=${value.y}`}
-          />
-        </Tooltip>
-      );
-    });
+    let emotesGen;
 
-    const emotesGen = (
-      <div className="container darkbox emoteSpacer">
-        <div className="emoteWrapper">{emoted}</div>
-      </div>
-    );
-
-    var clips;
     if (this.state.mixer.partnered === true) {
+      const emoted = Object.entries(obj).map(([key, value]) => {
+        return (
+          <Tooltip placement="top" overlay={key}>
+            <img
+              width="50px"
+              className="emote"
+              src={`https://emote.pixel.chat/api?source=external&pack=${this.state.emotes.url}&width=${value.width}&height=${value.height}&x=${value.x}&y=${value.y}`}
+            />
+          </Tooltip>
+        );
+      });
+
+      emotesGen = (
+        <div className="container darkbox emoteSpacer">
+          <div className="emoteWrapper">{emoted}</div>
+        </div>
+      );
+
       if (this.state.clips.length > 0) {
         clips = (
           <div className="maxed">
