@@ -9,6 +9,18 @@
   pointer-events: none;
 }
 
+.emoteWrapper {
+  padding: 30px;
+}
+
+.emote {
+  padding: 10px;
+}
+
+.emoteSpacer {
+  margin-bottom: 35px;
+}
+
 .imgCarousel0,
 .imgCarousel4 {
   border-radius: 50%;

@@ -14,7 +14,6 @@ import { TwitterTimelineEmbed } from "react-twitter-embed";
 import Carousel from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import ImageFB from "react-image-fallback";
-import Favico from "favico.js";
 
 const apiurl = "https://mixer.com/api/v1";
 const player = "https://mixer.com/embed/player/";
@@ -41,7 +40,8 @@ export default class UserPage extends React.Component {
     embersLB: [],
     embersLBweekly: [],
     embersLBmonthly: [],
-    embersLByearly: []
+    embersLByearly: [],
+    emotes: []
   };
 
   loadData() {
@@ -85,6 +85,16 @@ export default class UserPage extends React.Component {
         steam: res.data.social.steam
       });
     });
+  }
+
+  loadEmoteData() {
+    axios
+      .get(`${apiurl}/channels/${this.state.mixer.id}/emoticons`)
+      .then(res => {
+        this.setState({
+          emotes: res.data
+        });
+      });
   }
 
   loadHostData() {
@@ -202,6 +212,7 @@ export default class UserPage extends React.Component {
     this.interval = setInterval(() => this.loadUserData(), 1000);
     this.interval = setInterval(() => this.loadHostData(), 1000);
     this.interval = setInterval(() => this.loadClipsData(), 1000);
+    this.interval = setInterval(() => this.loadEmoteData(), 1000);
     this.interval = setInterval(() => this.loadLeaderboard(), 1000);
   }
 
@@ -280,7 +291,6 @@ export default class UserPage extends React.Component {
       }
 
       if (this.state.smclips.length > 0) {
-        console.log(this.state.smclips);
         smclips = (
           <div className="maxed">
             <Carousel
@@ -319,6 +329,26 @@ export default class UserPage extends React.Component {
         smclips = <div style={{ marginTop: "40px" }}></div>;
       }
     }
+
+    let obj = this.state.emotes.emoticons;
+
+    const emoted = Object.entries(obj).map(([key, value]) => {
+      return (
+        <Tooltip placement="top" overlay={key}>
+          <img
+            width="50px"
+            className="emote"
+            src={`https://emote.pixel.chat/api?source=external&pack=${this.state.emotes.url}&width=${value.width}&height=${value.height}&x=${value.x}&y=${value.y}`}
+          />
+        </Tooltip>
+      );
+    });
+
+    const emotesGen = (
+      <div className="container darkbox emoteSpacer">
+        <div className="emoteWrapper">{emoted}</div>
+      </div>
+    );
 
     var clips;
     if (this.state.mixer.partnered === true) {
@@ -629,11 +659,6 @@ export default class UserPage extends React.Component {
 
     let title;
 
-    var favicon = new Favico({
-      animation: "slide"
-    });
-    favicon.badge(1);
-
     if (this.state.mixer.online === true) {
       title = (
         <title>
@@ -896,6 +921,7 @@ export default class UserPage extends React.Component {
           </div>
           {clips}
           {smclips}
+          {emotesGen}
           <div className="container spacer">
             <div className="row">
               <div className="sparksBoard darkbox">
